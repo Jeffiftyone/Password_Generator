@@ -19,7 +19,6 @@ function generatePassword(){
     console.log("user chose a valid number between 8 and 128")
     break;
   }
-
   else{
     alert("This is an invalid choice");
   
