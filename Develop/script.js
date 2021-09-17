@@ -3,6 +3,7 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function generatePassword(){
+  //possible characters to to be added to password
   let spChar=["!","@","#","$","%","^","&","*","(",")","?","+","-","=",".","<",";",":","|","/","'","[","]","{","}","`","~"];
   let lowerChar=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
   let upperChar=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
@@ -28,16 +29,34 @@ function generatePassword(){
   let inclSpec=confirm("Include Capital Letters?");
   //check for invalid input
   if(
-    
+    (inclLower && inclUpper && inclNum && inclSpec)==false
   ){
+    alert("You must add atleast 1 type of input");
+    //start at beginning if no inputs
+    generatePassword();
+  }
+    //add the specified characters to a temp array to use for the password characters
+    let passwordChar=[];
+    if(inclUpper==true){
+      passwordChar=passwordChar.concat(upperChar);
+    }
+    if(inclLower==true){
+      passwordChar=passwordChar.concat(lowerChar);
+    }
+    if(inclNum==true){
+      passwordChar=passwordChar.concat(numChar);
+    }
+    if(inclSpec==true){
+      passwordChar=passwordChar.concat(spChar);
+    }
+  
+      //Generate password after all prompts answered
+  for(i=0;i<=passlength;i++){
+
 
   }
 
-  for(i=0;i<passlength;i++){
 
-  }
-
-  //Generate password after all prompts answered
 
   //display password on page/alert
 }
