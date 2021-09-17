@@ -12,13 +12,13 @@ function generatePassword(){
   let passlength=prompt("How long should the Password be? (8-128 Characters)");
   //check to see if password length is valid
   
-  if (7<passlength<129){
+  if (passlength>8||passlength<129){
     console.log("user chose a valid number between 8 and 128")
   }
 
   else{
     alert("This is an invalid choice");
-    generatePassword();
+  
   }
   //ask for whether or not to include uppercase, lowercase, numbers, and/or special characters
   //Each prompt should be validated and atleast on character type should be selected
@@ -29,7 +29,7 @@ function generatePassword(){
   let inclSpec=confirm("Include special Characters?");
   //check for invalid input
   if(
-    (inclLower && inclUpper && inclNum && inclSpec)==false
+    ((inclLower==false) && (inclUpper==false) && (inclNum==false) && (inclSpec==false))
   ){
     alert("You must add atleast 1 type of input");
     //start at beginning if no inputs
@@ -37,23 +37,39 @@ function generatePassword(){
   }
     //add the specified characters to a temp array to use for the password characters
     let passwordChar=[];
+    let charTypes=0;
+    //ensures at least one uppercase is added if true
     if(inclUpper==true){
       passwordChar=passwordChar.concat(upperChar);
+      newPassword=newPassword+upperChar[Math.floor(Math.random() * upperChar.length)];
+      charTypes++;
     }
+    //ensures at least one lower case is added if true
     if(inclLower==true){
       passwordChar=passwordChar.concat(lowerChar);
+      newPassword=newPassword+lowerChar[Math.floor(Math.random() * lowerChar.length)];
+      charTypes++;
     }
+    //ensures at least one number is added if true
     if(inclNum==true){
       passwordChar=passwordChar.concat(numChar);
+      newPassword=newPassword+numChar[Math.floor(Math.random() * numChar.length)];
+      charTypes++;
     }
+    
+    //ensures at least one special character is added if true
     if(inclSpec==true){
       passwordChar=passwordChar.concat(spChar);
+      newPassword=newPassword+spChar[Math.floor(Math.random() * spChar.length)];
+      charTypes++;
     }
+    console.log(charTypes+"outside of check ,this is current pass"+newPassword);
+    
   console.log(passwordChar);
       //Generate password after all prompts answered
-  for(i=0;i<=passlength;i++){
-     let index=Math.floor(Math.random() * passwordChar.length);
-     newPassword=newPassword+passwordChar[index];
+  for(i=0;i<(passlength-charTypes);i++){
+     let randIndex=Math.floor(Math.random() * passwordChar.length);
+     newPassword=newPassword+passwordChar[randIndex];
   }
 
   //new password generated
