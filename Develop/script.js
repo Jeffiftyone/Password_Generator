@@ -8,33 +8,46 @@ function generatePassword(){
   let lowerChar=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
   let upperChar=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
   let numChar=["1","2","3","4","5","6","7","8","9","0"];
-
-  let passlength=prompt("How long should the Password be? (8-128 Characters)");
+  let passlength=0;
+  while (true){
+    passlength=prompt("How long should the Password be? (8-128 Characters)");
   //check to see if password length is valid
   
   if (passlength>8||passlength<129){
     console.log("user chose a valid number between 8 and 128")
+    break;
   }
 
   else{
     alert("This is an invalid choice");
   
   }
+}
+
+  console.log("outside of while loop, passlength: "+passlength);
   //ask for whether or not to include uppercase, lowercase, numbers, and/or special characters
   //Each prompt should be validated and atleast on character type should be selected
   let newPassword="";
-  let inclUpper=confirm("Include UpperCase Letters?");
-  let inclLower=confirm("Include LowerCase Letters?");
-  let inclNum=confirm("Include Numbers?");
-  let inclSpec=confirm("Include special Characters?");
+  let inclUpper=false;
+  let inclLower=false;
+  let inclNum=false;
+  let inclSpec=false;
   //check for invalid input
+  while(true){
+   inclUpper=confirm("Include UpperCase Letters?");
+   inclLower=confirm("Include LowerCase Letters?");
+   inclNum=confirm("Include Numbers?");
+   inclSpec=confirm("Include special Characters?");
   if(
-    ((inclLower==false) && (inclUpper==false) && (inclNum==false) && (inclSpec==false))
+    ((inclLower==true) || (inclUpper==true) || (inclNum==true) || (inclSpec==true))
   ){
-    alert("You must add atleast 1 type of input");
-    //start at beginning if no inputs
-    generatePassword();
+    break;
   }
+  else{
+    alert("You must choose atleast 1 type of input");
+  }
+}
+console.log("outside of while loop");
     //add the specified characters to a temp array to use for the password characters
     let passwordChar=[];
     let charTypes=0;
