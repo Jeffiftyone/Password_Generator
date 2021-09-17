@@ -24,9 +24,9 @@ function generatePassword(){
   //Each prompt should be validated and atleast on character type should be selected
   let newPassword="";
   let inclUpper=confirm("Include UpperCase Letters?");
-  let inclLower=confirm("Include Capital Letters?");
-  let inclNum=confirm("Include Capital Letters?");
-  let inclSpec=confirm("Include Capital Letters?");
+  let inclLower=confirm("Include LowerCase Letters?");
+  let inclNum=confirm("Include Numbers?");
+  let inclSpec=confirm("Include special Characters?");
   //check for invalid input
   if(
     (inclLower && inclUpper && inclNum && inclSpec)==false
@@ -49,16 +49,15 @@ function generatePassword(){
     if(inclSpec==true){
       passwordChar=passwordChar.concat(spChar);
     }
-  
+  console.log(passwordChar);
       //Generate password after all prompts answered
   for(i=0;i<=passlength;i++){
-
-
+     let index=Math.floor(Math.random() * passwordChar.length);
+     newPassword=newPassword+passwordChar[index];
   }
 
-
-
-  //display password on page/alert
+  //new password generated
+  return newPassword;
 }
 
 function writePassword() {
@@ -66,7 +65,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
+  alert("Password: "+ password);
 }
 
 // Add event listener to generate button
